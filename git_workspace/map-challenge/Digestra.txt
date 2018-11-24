@@ -1,0 +1,296 @@
+   import java.io.*;
+import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays; 
+
+
+
+
+
+public class Digistra {
+	
+	public static  ArrayList<String> CitiesNames = new ArrayList<String>();
+	
+   private static final Graphs.Edge[] GRAPH = {
+       
+		   
+		   
+		   new Graphs.Edge("nahariyya", "safed", 37),
+		   new Graphs.Edge("safed","nahariyya" ,37),
+		   new Graphs.Edge("nahariyya", "nazareth", 39),
+		   new Graphs.Edge("nazareth","nahariyya", 39),
+		   new Graphs.Edge("nahariyya", "acre",9),
+		   new Graphs.Edge("acre","nahariyya",9),
+		   new Graphs.Edge("nahariyya", "haifa",32),
+		   new Graphs.Edge( "haifa","nahariyya",32),
+		   new Graphs.Edge("acre", "safed",39),
+		   new Graphs.Edge( "safed","acre",39),
+		   new Graphs.Edge("acre", "nazareth",33),
+		   new Graphs.Edge( "nazareth","acre",33),
+		   new Graphs.Edge("acre", "haifa",26),
+		   new Graphs.Edge( "haifa","acre",26),
+		   new Graphs.Edge("tiberias", "haifa",51),
+		   new Graphs.Edge("haifa","tiberias", 51),
+		   new Graphs.Edge("nazareth", "haifa",32), 
+		   new Graphs.Edge( "haifa","nazareth",32),
+		   new Graphs.Edge("nazareth", "safed",59),
+		   new Graphs.Edge( "safed","nazareth",59),
+		   new Graphs.Edge("nazareth", "tiberias",31),
+		   new Graphs.Edge("tiberias", "safed",36),
+		   new Graphs.Edge( "safed","tiberias",36),
+		   new Graphs.Edge("nazareth", "jenin",26),
+		   new Graphs.Edge( "jenin","nazareth",26),  
+		   new Graphs.Edge("nazareth", "hadera",36),
+		   new Graphs.Edge( "hadera","nazareth",36),
+		   new Graphs.Edge( "hadera","tiberias",70),
+		   new Graphs.Edge( "tiberias","hadera",70),
+		   new Graphs.Edge( "hadera","jenin",36),
+		   new Graphs.Edge( "jenin","hadera",36),
+		   new Graphs.Edge( "jenin","tubas",17),
+		   new Graphs.Edge( "tubas","jenin",17),
+		   new Graphs.Edge( "jenin","tulkarem",31),
+		   new Graphs.Edge( "tulkarem","jenin",31),
+		   new Graphs.Edge( "jenin","tiberias",43),
+		   new Graphs.Edge( "tiberias","jenin",43),	   
+		   new Graphs.Edge( "tulkarem","hadera",17),
+		   new Graphs.Edge( "hadera","tulkarem",17),
+		   new Graphs.Edge( "tulkarem","nablus",24),
+		   new Graphs.Edge( "nablus","tulkarem",24),
+		   new Graphs.Edge( "nablus","tubas",15),
+		   new Graphs.Edge( "tubas","nablus",15),
+		   new Graphs.Edge( "netanya","nablus",40),
+		   new Graphs.Edge( "nablus","netanya",40),
+		   new Graphs.Edge( "tel aviv-yafo","netanya",22),
+		   new Graphs.Edge( "netanya","tel aviv-yafo",22),
+		   new Graphs.Edge( "tel aviv-yafo","nillen",27),
+		   new Graphs.Edge( "nillen","tel aviv-yafo",27),
+		   new Graphs.Edge( "nillen","nablus",38),
+		   new Graphs.Edge( "nablus","nillen",38), 
+		   new Graphs.Edge( "nillen","lod",13),
+		   new Graphs.Edge( "lod","nillen",13),
+		   new Graphs.Edge( "nillen","ramallah",18),
+		   new Graphs.Edge( "ramallah","nillen",18),
+		   new Graphs.Edge( "lod","ashdod",27),
+		   new Graphs.Edge( "ashdod","lod",27),
+		   new Graphs.Edge( "lod","tel aviv-yafo",18),
+		   new Graphs.Edge( "tel aviv-yafo","lod",18),
+		   new Graphs.Edge( "lod","ashkelon",43),
+		   new Graphs.Edge( "ashkelon","lod",43),
+		   new Graphs.Edge( "lod","al ramlah",3),
+		   new Graphs.Edge( "al ramlah","lod",3),
+		   new Graphs.Edge( "lod","ramallah",30),
+		   new Graphs.Edge( "ramallah","lod",30),
+		   new Graphs.Edge( "lod","jerusalem",37),
+		   new Graphs.Edge( "jerusalem","lod",37),
+		   new Graphs.Edge( "jerusalem","al ramlah",38),
+		   new Graphs.Edge( "al ramlah","jerusalem",38),
+		   new Graphs.Edge( "jerusalem","ramallah",15),
+		   new Graphs.Edge( "ramallah","jerusalem",15),
+		   new Graphs.Edge( "ramallah","jericho",25),
+		   new Graphs.Edge( "jericho","ramallah",25),
+		   new Graphs.Edge( "jericho","jerusalem",25),
+		   new Graphs.Edge( "jerusalem","jericho",25),
+		   new Graphs.Edge( "jericho","tubas",52),
+		   new Graphs.Edge( "tubas","jericho",52),
+		   new Graphs.Edge( "ashkelon","gaza",15),
+		   new Graphs.Edge( "gaza","ashkelon",15),
+		   new Graphs.Edge( "ashkelon","ashdod",9),
+		   new Graphs.Edge( "ashdod","ashkelon",9),
+		   new Graphs.Edge( "jerusalem","gaza",77),
+		   new Graphs.Edge( "gaza","jerusalem",77),
+		   new Graphs.Edge( "jerusalem","beth lehem",7),
+		   new Graphs.Edge( "beth lehem","jerusalem",7),
+		   new Graphs.Edge( "gaza","beth lehem",28),
+		   new Graphs.Edge( "beth lehem","gaza",28),
+		   new Graphs.Edge( "beth lehem","hebron",22),
+		   new Graphs.Edge( "beth lehem","hebron",22),
+		   new Graphs.Edge( "beer sheva","hebron",43),
+		   new Graphs.Edge( "hebron","beer sheva",43),
+		   new Graphs.Edge( "beer sheva","gaza",41),
+		   new Graphs.Edge( "gaza","beer sheva",41),
+		   new Graphs.Edge( "beer sheva","dimona",31),
+		   new Graphs.Edge( "dimona","beer sheva",31),
+		   new Graphs.Edge( "beer sheva","mitz ramon",72),
+		   new Graphs.Edge( "mitz ramon","beer sheva",72),
+		   new Graphs.Edge( "mitz ramon","dimona",56),
+		   new Graphs.Edge( "dimona","mitz ramon",56),
+		   new Graphs.Edge( "mitz ramon","eilat",118),
+		   new Graphs.Edge( "eilat","mitz ramon",118),
+		   new Graphs.Edge( "dimona","jericho",97),
+		   new Graphs.Edge( "jericho","dimona",97),
+		   new Graphs.Edge( "khan yunis","gaza",23),
+		   new Graphs.Edge( "gaza","khan yunis",23),
+		   new Graphs.Edge( "khan yunis","rafah",10),
+		   new Graphs.Edge( "rafah","khan yunis",10),
+		   
+		   
+		   
+//       new Graph.Edge("a-ka", "b", 1),
+//       new Graph.Edge("a-ka", "c", 2),
+//       new Graph.Edge("a-ka", "d", 4),
+//       new Graph.Edge("b", "e", 5),
+//       new Graph.Edge("c", "e", 6),
+//       new Graph.Edge("d", "f", 8),
+//       new Graph.Edge("e", "l", 12),
+//       new Graph.Edge("l", "m-nasra", 8),
+//       new Graph.Edge("f", "g", 10),
+//       new Graph.Edge("g", "m-nasra", 3),
+//       
+//       new Graph.Edge("b", "a", 1),
+//       new Graph.Edge("c", "a", 2),
+//       new Graph.Edge("d", "a", 4),
+//       new Graph.Edge("e", "b", 5),
+//       new Graph.Edge("e", "c", 6),
+//       new Graph.Edge("f", "d", 8),
+//       new Graph.Edge("l", "e", 12),
+//       new Graph.Edge("m", "l", 8),
+//       new Graph.Edge("g", "f", 10),
+//       new Graph.Edge("m", "g", 3),
+      
+       
+       
+//      new Graph.Edge("a", "b", 7),
+//      new Graph.Edge("a", "c", 9),
+//      new Graph.Edge("a", "f", 14),
+//      new Graph.Edge("b", "c", 10),
+//      new Graph.Edge("b", "d", 15),
+//      new Graph.Edge("c", "d", 11),
+//      new Graph.Edge("c", "f", 2),
+//      new Graph.Edge("d", "e", 6),
+//      new Graph.Edge("e", "f", 9),
+   };
+   private static final String START = "jerusalem";
+   private static final String END = "hebron";
+ 
+   public static void main(String[] args) {
+      Graphs g = new Graphs(GRAPH);
+      g.dijkstra(START);
+      g.printPath(END);
+      //g.printAllPaths();
+      
+      for (int i = 0; i < CitiesNames.size(); i++) {
+		System.err.println(CitiesNames.get(i)+"--+");
+	}
+      
+   }
+}
+ 
+class Graph {
+   private final Map<String, Vertex> graph; // mapping of vertex names to Vertex objects, built from a set of Edges
+ 
+   /** One edge of the graph (only used by Graph constructor) */
+   public static class Edge {
+      public final String v1, v2;
+      public final int dist;
+      public Edge(String v1, String v2, int dist) {
+         this.v1 = v1;
+         this.v2 = v2;
+         this.dist = dist;
+      }
+   }
+ 
+   /** One vertex of the graph, complete with mappings to neighbouring vertices */
+   public static class Vertex implements Comparable<Vertex> {
+      public final String name;
+      public int dist = Integer.MAX_VALUE; // MAX_VALUE assumed to be infinity
+      public Vertex previous = null;
+      public final Map<Vertex, Integer> neighbours = new HashMap<>();
+ 
+      public Vertex(String name) {
+         this.name = name;
+      }
+ 
+      private void printPath() {
+         if (this == this.previous) {
+            System.out.printf("%s", this.name);
+         } else if (this.previous == null) {
+            System.out.printf("%s(unreached)", this.name);
+         } else {
+            this.previous.printPath();
+            System.out.printf(" -> %s(%d)", this.name, this.dist);
+            Digistra.CitiesNames.add(this.name);
+         }
+      }
+ 
+      public int compareTo(Vertex other) {
+         return Integer.compare(dist, other.dist);
+      }
+   }
+ 
+   /** Builds a graph from a set of edges */
+   public Graph(Edge[] edges) {
+      graph = new HashMap<>(edges.length);
+ 
+      //one pass to find all vertices
+      for (Edge e : edges) {
+         if (!graph.containsKey(e.v1)) graph.put(e.v1, new Vertex(e.v1));
+         if (!graph.containsKey(e.v2)) graph.put(e.v2, new Vertex(e.v2));
+      }
+ 
+      //another pass to set neighbouring vertices
+      for (Edge e : edges) {
+         graph.get(e.v1).neighbours.put(graph.get(e.v2), e.dist);
+         //graph.get(e.v2).neighbours.put(graph.get(e.v1), e.dist); // also do this for an undirected graph
+      }
+   }
+ 
+   /** Runs dijkstra using a specified source vertex */ 
+   public void dijkstra(String startName) {
+      if (!graph.containsKey(startName)) {
+         System.err.printf("Graph doesn't contain start vertex \"%s\"\n", startName);
+         return;
+      }
+      final Vertex source = graph.get(startName);
+      NavigableSet<Vertex> q = new TreeSet<>();
+ 
+      // set-up vertices
+      for (Vertex v : graph.values()) {
+         v.previous = v == source ? source : null;
+         v.dist = v == source ? 0 : Integer.MAX_VALUE;
+         q.add(v);
+      }
+ 
+      dijkstra(q);
+   }
+ 
+   /** Implementation of dijkstra's algorithm using a binary heap. */
+   private void dijkstra(final NavigableSet<Vertex> q) {      
+      Vertex u, v;
+      while (!q.isEmpty()) {
+ 
+         u = q.pollFirst(); // vertex with shortest distance (first iteration will return source)
+         if (u.dist == Integer.MAX_VALUE) break; // we can ignore u (and any other remaining vertices) since they are unreachable
+ 
+         //look at distances to each neighbour
+         for (Map.Entry<Vertex, Integer> a : u.neighbours.entrySet()) {
+            v = a.getKey(); //the neighbour in this iteration
+ 
+            final int alternateDist = u.dist + a.getValue();
+            if (alternateDist < v.dist) { // shorter path to neighbour found
+               q.remove(v);
+               v.dist = alternateDist;
+               v.previous = u;
+               q.add(v);
+            } 
+         }
+      }
+   }
+ 
+   /** Prints a path from the source to the specified vertex */
+   public void printPath(String endName) {
+      if (!graph.containsKey(endName)) {
+         System.err.printf("Graph doesn't contain end vertex \"%s\"\n", endName);
+         return;
+      }
+ 
+      graph.get(endName).printPath();
+      System.out.println();
+   }
+   /** Prints the path from the source to every vertex (output order is not guaranteed) */
+   public void printAllPaths() {
+      for (Vertex v : graph.values()) {
+         v.printPath();
+         System.out.println();
+      }
+   }
+}
